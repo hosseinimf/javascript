@@ -1,0 +1,128 @@
+*{
+    margin: 0px;
+    padding: 0px;
+    
+}
+body{
+    background-image: url(6uM1mq.jpg);
+    background-size: cover;
+    background-attachment: fixed;
+
+}
+h1{
+    font-size: 40px;
+    color: white;
+    margin-top: 200px;
+}
+p{
+    font-size: 17px;
+    color: white;
+}
+
+h3{
+    font-size: 25px;
+    color: white;
+    margin-top: 20px;
+}
+h4{
+    color: white;
+    margin-top: 20px;
+}
+#submit , #add{
+    width: 100%;
+    background-color: gray;
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid black;
+    
+}
+.form-style{
+    margin-top: 80px;
+    box-shadow: -1px 1px 60px 19px black;
+    background: rgba(0,0,0,0.4);
+    padding: 20px;
+    border-radius: 20px;
+}
+.label{
+    font-weight: normal;
+    margin-top: 15px;
+    color: white;
+    font-size: 18px;
+}
+.form-control{
+    background: transparent;
+    border-radius: 0px;
+    border: 0px;
+    border-bottom: 1px solid white;
+    font-size: 18px;
+    margin-top: 15px;
+    height: 40px;
+    color: white;
+}
+.list li{
+    margin-top: 20px;
+    margin-left: 30px;
+}
+.list p{
+    margin-top: 0px;
+    margin-left: 20px;
+}
+.list hr{
+    border-color: rgb(87, 86, 86);
+}
+.list-style{
+    margin-top: 80px;
+    box-shadow: -1px 1px 60px 19px black;
+    background: rgba(0,0,0,0.4);
+    padding: 20px;
+    color: white;
+    width: 80%;
+    text-align: left;
+    margin-left: 50px;
+    border-radius: 20px;
+}
+.li button{
+    padding: 5px;
+    font-size: 20px;
+    margin-left: 15px;
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer; 
+}
+.li i{
+    font-weight: 200;
+}
+
+.li{
+    
+    border: 1px solid gray;
+    border-radius: 10px;
+    padding: 5px;
+}
+
+ol{
+    list-style: none;
+}
+.item-name{
+    background-color: gray;
+    opacity: 60%;
+    padding: 3px;
+    border-radius: 5px;
+    
+}
+
+.item-name button{
+    float: right;
+    line-height: 20px;
+    margin-right: 5px;
+}
+.item-name label{
+    padding-top: 2px;
+    margin-left: 10px;
+}
+.email-phone, .address{
+    margin-top: 10px;
+    margin-left: 10px;
+    margin-bottom: 10px;
+}
