@@ -18,11 +18,15 @@ class Person {
         return `${this.email} ${this.phone}`;
     }
 }
+
 var personList = [];
 
- 
 var submit = document.getElementById("submit");
 submit.addEventListener("click", submitFunc);
+
+
+
+
 
 function addToList(list, person) {
     list.push(person);
@@ -74,6 +78,8 @@ function renderLi(person) {
     btnEdit.innerHTML = '<i class="far fa-edit"></i>';
     btnTrash.innerHTML = '<i class="fa fa-trash"></i>';
     lbl.innerText = `${person.firstName} ${person.lastName}`;
+
+    btnTrash.addEventListener('click', () => { removeFunc(person) });
     
     div.append(lbl, btnEdit, btnTrash);
     li.append(div, divDetails);
@@ -81,17 +87,30 @@ function renderLi(person) {
     return li;
 }
 
+
+
 function submitFunc() {
     person1 = CreatePerson();
+    personList.push(person1);
 
-    
-    const maindiv = document.getElementById('list-style');
+    const orderList = document.getElementById('list');
+    orderList.innerText = '';
 
-    const orderList = document.createElement('ol');
-    orderList.classList.add('list');
-    orderList.append(renderLi(person1));
-    maindiv.append(orderList);
-    
+    for (const item of personList) {
+        orderList.append(renderLi(item));
+    }
+}
+
+function removeFunc(person) {
+    const index = personList.indexOf(person);
+    personList.splice(index, 1);
+
+    const orderList = document.getElementById('list');
+    orderList.innerText = '';
+
+    for (const item of personList) {
+        orderList.append(renderLi(item));
+    }
 }
 
 function CreatePerson() {
@@ -106,6 +125,8 @@ function CreatePerson() {
         )
         return person;
 }
+
+
 
 
 
