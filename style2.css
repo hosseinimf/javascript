@@ -11,12 +11,12 @@ body{
 }
 h1{
     font-size: 40px;
-    color: white;
+    color: lightgray;
     margin-top: 200px;
 }
 p{
     font-size: 17px;
-    color: white;
+    color: lightgray;
 }
 
 h3{
@@ -25,7 +25,7 @@ h3{
     margin-top: 20px;
 }
 h4{
-    color: white;
+    color: lightgray;
     margin-top: 20px;
 }
 #submit , #add{
@@ -38,7 +38,7 @@ h4{
 }
 .form-style{
     margin-top: 80px;
-    box-shadow: -1px 1px 60px 19px black;
+    box-shadow: -1px 1px 15px 1px #D2B48C;
     background: rgba(0,0,0,0.4);
     padding: 20px;
     border-radius: 20px;
@@ -46,7 +46,7 @@ h4{
 .label{
     font-weight: normal;
     margin-top: 15px;
-    color: white;
+    color: lightgray;
     font-size: 18px;
 }
 .form-control{
@@ -57,7 +57,7 @@ h4{
     font-size: 18px;
     margin-top: 15px;
     height: 40px;
-    color: white;
+    color: lightgray;
 }
 .list li{
     margin-top: 20px;
@@ -75,7 +75,7 @@ h4{
     box-shadow: -1px 1px 60px 19px black;
     background: rgba(0,0,0,0.4);
     padding: 20px;
-    color: white;
+    color: lightgray;
     width: 80%;
     text-align: left;
     margin-left: 50px;
@@ -87,7 +87,7 @@ h4{
     margin-left: 15px;
     background: none;
     border: none;
-    color: white;
+    color: lightgray;
     cursor: pointer; 
 }
 .li i{
@@ -120,6 +120,7 @@ ol{
 .item-name label{
     padding-top: 2px;
     margin-left: 10px;
+    font-size: 20px;
 }
 .email-phone, .address{
     margin-top: 10px;
@@ -127,9 +128,15 @@ ol{
     margin-bottom: 10px;
 }
 .error{
-    color: red;
+    color: rgb(214, 95, 95);
 }
 #select{
     width: 100%;
     
+}
+h4{
+    color: #D2B48C;
+}
+#lists{
+    color: #D2B48C;
 }

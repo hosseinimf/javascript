@@ -70,12 +70,14 @@
                             <label class="label col-md-4">City</label>
                             <div class="col-md-8">
                                 <input id="city" type="text" class="form-control" name="city" placeholder="City">
+                                <span id="cityError" class="error"></span>
                             </div>
                         </div>
                         <div class="row">
                             <label class="label col-md-4">Postal code</label>
                             <div class="col-md-8">
-                                <input id="zipcode" type="number" class="form-control" name="postal-code" placeholder="Postal code">
+                                <input id="zipcode" type="number" class="form-control" maxlength="5" placeholder="Postal code">
+                                <span id="zipcodeError" class="error"></span>
                             </div>
                         </div>
                         
@@ -91,9 +93,9 @@
         </div>
 
             <div id="list-style" class="col-md-10 form-style">
-                <p>Lists</p>
+                <p id="lists">Lists</p>
                 <ol id="list" class="list" style="color: white;">
-                    <li id="li" class="li">
+                    <!-- <li id="li" class="li">
                         <div class="item-name">
                             <label>firstlast name</label>
                             <button id="editBtn" class="btn"><i class="far fa-edit"></i></button>
@@ -117,7 +119,7 @@
                             </div>
                             
                         </div>
-                    </li>
+                    </li> -->
                 </ol>
             </div>
     </div> 

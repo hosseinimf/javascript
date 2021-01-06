@@ -29,6 +29,91 @@ function CreatePerson() {
         return person;
 }
 
+function renderLi(person) {
+    const li = document.createElement('li');
+    const div = document.createElement('div');
+    const lbl = document.createElement('label');
+    const btnEdit = document.createElement('button');
+    const btnTrash = document.createElement('button');
+    const divDetails = document.createElement('div');
+    divDetails.classList.add('item-details');
+    const divRow = document.createElement('div');
+    divRow.classList.add('row');
+    const divEmailPhone = document.createElement('div');
+    divEmailPhone.classList.add('email-phone', 'col-md-5');
+    const divemail = document.createElement('div');
+    const lblEmail = document.createElement('label');
+    const lblPhone = document.createElement('label');
+    const lblAddress = document.createElement('label');
+    const divPhone = document.createElement('div');
+    const divAddress = document.createElement('div');
+    divAddress.classList.add('address', 'col-md-5');
+    const divAdd = document.createElement('div');
+
+    divemail.innerText = 'Email :  ';
+    divPhone.innerText = 'Phone :  ';
+    divAdd.innerText = 'Address :  ';
+
+    lblAddress.innerText = `${person.Address()}`;
+    lblPhone.innerText = `${person.phone}`;
+    lblEmail.innerText = `${person.email}`;
+
+    divemail.append(lblEmail);
+    divPhone.append(lblPhone);
+    divAdd.append(lblAddress);
+    divEmailPhone.append(divemail, divPhone);
+    divAddress.append(divAdd);
+    divRow.append(divEmailPhone, divAddress);
+    divDetails.append(divRow);
+
+
+
+    li.classList.add('li');
+    div.classList.add('item-name');
+    btnEdit.classList.add('btn');
+    btnTrash.classList.add('btn');
+    btnEdit.innerHTML = '<i class="far fa-edit"></i>';
+    btnTrash.innerHTML = '<i class="fa fa-trash"></i>';
+    lbl.innerText = `${person.firstName} ${person.lastName}`;
+
+    btnTrash.addEventListener('click', () => { removeFunc(person) });
+    
+    div.append(lbl, btnEdit, btnTrash);
+    li.append(div, divDetails);
+
+    return li;
+}
+
+var personList = [];
+
+var submit = document.getElementById("submit");
+submit.addEventListener("click", submitFunc);
+
+function submitFunc() {
+    if (validateForm()) {
+        person1 = CreatePerson();
+        personList.push(person1);
+        const orderList = document.getElementById('list');
+        orderList.innerText = '';
+
+        for (const item of personList) {
+            orderList.append(renderLi(item));
+        }
+    } 
+}
+
+function removeFunc(person) {
+    const index = personList.indexOf(person);
+    personList.splice(index, 1);
+
+    const orderList = document.getElementById('list');
+    orderList.innerText = '';
+
+    for (const item of personList) {
+        orderList.append(renderLi(item));
+    }
+}
+
 
 const fNameInput = document.getElementById('first-name');
 const fNameErrorElement = document.getElementById('firstNameError');
@@ -40,7 +125,10 @@ const phoneInput = document.getElementById('phone');
 const phoneErrorElement = document.getElementById('phoneError');
 const streetInput = document.getElementById('street');
 const streetErrorElement = document.getElementById('streetError');
-
+const cityInput = document.getElementById('city');
+const cityErrorElement = document.getElementById('cityError');
+const postalInput = document.getElementById('zipcode');
+const postalErrorElement = document.getElementById('zipcodeError');
 
 function validateInput(inputElement, errorElement, errorMessage) {
     errorElement.innerText = '';
@@ -68,12 +156,39 @@ const validatePhone = (phoneNumber, phoneErrorElement) => {
 
     if (re.test(phoneNumber)){
         phoneErrorElement.innerText = '';
+        return true;
     }else {
         phoneErrorElement.innerText = 'invalid phone number! Phone number must have 10-12 digits!';
+        return false;
     }
 }
 
+const validatePostal = (inputElement, errorElement, errorMessage) => {
+    var n = inputElement.value.length;
+    errorElement.innerText = '';
+    if (n === 5){
+        return true;
+    }else {
+        errorElement.innerText = errorMessage;
+        return false;
+    }
+}
 
+const validateForm = () => {
+    var isName = validateInput(fNameInput, fNameErrorElement, 'name is required' );
+    var isFamily = validateInput(lNameInput, lNameErrorElement, 'last name is required');
+    var isEmail = validateEmail(emailInput, emailErrorElement, 'email is invalid');
+    var isPhone = validatePhone(phoneInput.value, phoneErrorElement);
+    var isStreet = validateInput(streetInput, streetErrorElement, 'street is required');
+    var isCity = validateInput(cityInput, cityErrorElement, 'city is required');
+    var isPostal = validatePostal(postalInput, postalErrorElement, 'postal code must have 5 digits');
+
+    if (isName && isFamily && isEmail && isPhone && isStreet && isCity && isPostal){
+        return true;
+    }else{
+        return false;
+    }
+}
 
 const addBtn = document.getElementById('add');
 addBtn.addEventListener('click', () => {
@@ -82,5 +197,7 @@ addBtn.addEventListener('click', () => {
     validateEmail(emailInput, emailErrorElement, 'email is invalid');
     validatePhone(phoneInput.value, phoneErrorElement);
     validateInput(streetInput, streetErrorElement, 'street is required');
+    validateEmail(cityInput, cityErrorElement, 'city is required');
+    validatePostal(postalInput, postalErrorElement, 'postal code must have 5 digits');
 })
 
