@@ -15,9 +15,10 @@
 <body>
     
     <div class="container">
-        <div class="row">
+        
+            <div class="row">
             
-            <div class="col-md-10 form-style">
+                <div class="col-md-4 form-style">
                 <div class="row">
                     <div class="col-md-6">
                         <h3 class="text-left">Registration Form</h3>
@@ -30,14 +31,14 @@
                         </div>
                         
                         <div class="col-md-8">
-                            <input id="first-name" type="text" class="form-control" name="first-name" placeholder="First Name">
+                            <input id="first-name" onclick="this.select();" type="text" class="form-control" name="first-name" placeholder="First Name">
                             <span id="firstNameError" class="error"></span>
                         </div>
                     </div>
                     <div class="row">
                         <label class="label col-md-4">Last Name</label>
                         <div class="col-md-8">
-                            <input id="last-name" type="text" class="form-control" name="last-name" placeholder="Last Name">
+                            <input id="last-name" onclick="this.select();" type="text" class="form-control" name="last-name" placeholder="Last Name">
                             <span id="lastNameError" class="error"></span>
                         </div>
                     </div>
@@ -46,14 +47,14 @@
                             <label class="label">E-mail</label>
                         </div>
                         <div class="col-md-8">
-                            <input id="email" type="Email" class="form-control" name="email" placeholder="E-mail">
+                            <input id="email" onclick="this.select();" type="Email" class="form-control" name="email" placeholder="E-mail">
                             <span id="emailError" class="error"></span>
                         </div>
                     </div>
                     <div class="row">
                         <label class="label col-md-4">Phone Number</label>
                         <div class="col-md-8">
-                            <input id="phone" type="text" class="form-control" name="phone" placeholder="Phone Number">
+                            <input id="phone" onclick="this.select();" type="number" class="form-control" name="phone" placeholder="Phone Number">
                             <span id="phoneError" class="error"></span>
                         </div>
                     </div>
@@ -62,21 +63,21 @@
                         <div class="row">
                             <label class="label col-md-4">Street</label>
                             <div class="col-md-8">
-                                <input id="street" type="text" class="form-control" name="street" placeholder="Street">
+                                <input id="street" onclick="this.select();" type="text" class="form-control" name="street" placeholder="Street">
                                 <span id="streetError" class="error"></span>
                             </div>
                         </div>
                         <div class="row">
                             <label class="label col-md-4">City</label>
                             <div class="col-md-8">
-                                <input id="city" type="text" class="form-control" name="city" placeholder="City">
+                                <input id="city" onclick="this.select();" type="text" class="form-control" name="city" placeholder="City">
                                 <span id="cityError" class="error"></span>
                             </div>
                         </div>
                         <div class="row">
                             <label class="label col-md-4">Postal code</label>
                             <div class="col-md-8">
-                                <input id="zipcode" type="number" class="form-control" maxlength="5" placeholder="Postal code">
+                                <input id="zipcode" onclick="this.select();" type="number" class="form-control" maxlength="5" placeholder="Postal code">
                                 <span id="zipcodeError" class="error"></span>
                             </div>
                         </div>
@@ -85,13 +86,13 @@
                         <button type="button" id="submit">submit</button>
                         <br><br>
                     </div>
-            </div>
-        </div>
+                </div>
 
-            <div id="list-style" class="col-md-10 form-style">
-                <p id="lists">Lists</p>
-                <ol id="list" class="list" style="color: white;">
-                    <!-- <li id="li" class="li">
+            
+                <div id="list-style" class="col-md-6 form-style">
+                    <p id="lists">Lists</p>
+                    <ol id="list" class="list" style="color: white;">
+                    <li id="li" class="li">
                         <div class="item-name">
                             <label>firstlast name</label>
                             <button id="editBtn" class="btn"><i class="far fa-edit"></i></button>
@@ -115,10 +116,11 @@
                             </div>
                             
                         </div>
-                    </li> -->
+                    </li>
                 </ol>
-            </div>
+                </div>
     </div> 
+</div>
     <script src="javascript.js"></script>
 </body>
 </html>

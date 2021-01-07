@@ -77,6 +77,8 @@ function renderLi(person) {
     lbl.innerText = `${person.firstName} ${person.lastName}`;
 
     btnTrash.addEventListener('click', () => { removeFunc(person) });
+    divDetails.addEventListener('click', () => { prepareEditFunc(person) });
+    btnEdit.addEventListener('click', () => { editFunc(person) });
     
     div.append(lbl, btnEdit, btnTrash);
     li.append(div, divDetails);
@@ -102,6 +104,20 @@ function submitFunc() {
     } 
 }
 
+const editFunc = (person) => {
+    const index = personList.indexOf(person);
+    if (validateForm()) {
+        editedPerson = CreatePerson();
+        personList[index] = editedPerson;
+        const orderList = document.getElementById('list');
+        orderList.innerText = '';
+
+        for (const item of personList) {
+            orderList.append(renderLi(item));
+        }
+    } 
+}
+
 function removeFunc(person) {
     const index = personList.indexOf(person);
     personList.splice(index, 1);
@@ -113,6 +129,21 @@ function removeFunc(person) {
         orderList.append(renderLi(item));
     }
 }
+ 
+const prepareEditFunc = (person) => {
+    fNameInput.value = person.firstName;
+    lNameInput.value = person.lastName;
+    emailInput.value = person.email;
+    phoneInput.value = person.phone;
+    streetInput.value = person.street;
+    cityInput.value = person.city;
+    postalInput.value = person.zipcode;
+
+    fNameInput.select();
+    return personList.indexOf(person);
+}
+
+
 
 
 const fNameInput = document.getElementById('first-name');
@@ -189,5 +220,4 @@ const validateForm = () => {
         return false;
     }
 }
-
 

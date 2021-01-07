@@ -42,6 +42,7 @@ h4{
     background: rgba(0,0,0,0.4);
     padding: 20px;
     border-radius: 20px;
+    margin-left: 40px;
 }
 .label{
     font-weight: normal;
@@ -58,6 +59,7 @@ h4{
     margin-top: 15px;
     height: 40px;
     color: lightgray;
+    
 }
 .list li{
     margin-top: 20px;
@@ -106,10 +108,10 @@ ol{
 }
 .item-name{
     background-color: gray;
+    
     opacity: 60%;
     padding: 3px;
     border-radius: 5px;
-    
 }
 
 .item-name button{
@@ -121,6 +123,8 @@ ol{
     padding-top: 2px;
     margin-left: 10px;
     font-size: 20px;
+    width: 60%;
+    cursor: pointer;
 }
 .email-phone, .address{
     margin-top: 10px;
@@ -139,4 +143,15 @@ h4{
 }
 #lists{
     color: #D2B48C;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+input[type=number] {
+    -moz-appearance: textfield;
+}
+.item-details{
+    cursor: pointer;
 }
