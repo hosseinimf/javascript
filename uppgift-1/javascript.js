@@ -1,5 +1,6 @@
 class Person {
-    constructor (firstName, lastName, email, phone, street, city, zipcode) {
+    constructor (id, firstName, lastName, email, phone, street, city, zipcode) {
+        this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
@@ -18,6 +19,7 @@ class Person {
 
 function CreatePerson() {
     var person = new Person(
+        uuid(),
         document.getElementById("first-name").value, 
         document.getElementById("last-name").value, 
         document.getElementById("email").value,
@@ -42,6 +44,8 @@ function renderLi(person) {
     const divEmailPhone = document.createElement('div');
     divEmailPhone.classList.add('email-phone', 'col-md-5');
     const divemail = document.createElement('div');
+    const divId = document.createElement('div');
+    const lblId = document.createElement('label');
     const lblEmail = document.createElement('label');
     const lblPhone = document.createElement('label');
     const lblAddress = document.createElement('label');
@@ -50,6 +54,7 @@ function renderLi(person) {
     divAddress.classList.add('address', 'col-md-5');
     const divAdd = document.createElement('div');
 
+    divId.innerText = 'Id : ';
     divemail.innerText = 'Email :  ';
     divPhone.innerText = 'Phone :  ';
     divAdd.innerText = 'Address :  ';
@@ -57,16 +62,16 @@ function renderLi(person) {
     lblAddress.innerText = `${person.Address()}`;
     lblPhone.innerText = `${person.phone}`;
     lblEmail.innerText = `${person.email}`;
+    lblId.innerText = `${person.id}`;
 
+    divId.append(lblId);
     divemail.append(lblEmail);
     divPhone.append(lblPhone);
     divAdd.append(lblAddress);
-    divEmailPhone.append(divemail, divPhone);
+    divEmailPhone.append(divId, divemail, divPhone);
     divAddress.append(divAdd);
     divRow.append(divEmailPhone, divAddress);
     divDetails.append(divRow);
-
-
 
     li.classList.add('li');
     div.classList.add('item-name');
@@ -78,10 +83,21 @@ function renderLi(person) {
 
     btnTrash.addEventListener('click', () => { removeFunc(person) });
     divDetails.addEventListener('click', () => { prepareEditFunc(person) });
+    lbl.addEventListener('click', () => { prepareEditFunc(person) });
     btnEdit.addEventListener('click', () => { editFunc(person) });
     
     div.append(lbl, btnEdit, btnTrash);
     li.append(div, divDetails);
+
+    $(document).ready(function(){
+        $(divDetails).hide();
+    });
+
+    $(document).ready(function(){
+        $(lbl).click(function(){
+            $(divDetails).toggle();
+        });
+      });
 
     return li;
 }
@@ -94,21 +110,45 @@ submit.addEventListener("click", submitFunc);
 function submitFunc() {
     if (validateForm()) {
         person1 = CreatePerson();
-        personList.push(person1);
-        const orderList = document.getElementById('list');
-        orderList.innerText = '';
+        emailErrorElementt.innerText = '';
+        if (compare(person1.email, personList)){
+            emailErrorElementt.innerText = 'this email is already registered';
+        }else {
+            personList.push(person1);
+            const orderList = document.getElementById('list');
+            orderList.innerText = '';
 
-        for (const item of personList) {
-            orderList.append(renderLi(item));
+            for (const item of personList) {
+                orderList.append(renderLi(item));
+            }
+        } 
+    }else{
+        emailErrorElementt.innerText = '';
+    }
+}
+
+const compare = (email, list) => {
+    const exist = false;
+    for (const item of list) {
+        if (email === item.email) {
+            return true;
         }
-    } 
+    }
+    return exist;
 }
 
 const editFunc = (person) => {
     const index = personList.indexOf(person);
     if (validateForm()) {
-        editedPerson = CreatePerson();
-        personList[index] = editedPerson;
+        
+        personList[index].firstName = fNameInput.value;
+        personList[index].lastName = lNameInput.value;
+        personList[index].email = emailInput.value;
+        personList[index].phone = phoneInput.value;
+        personList[index].street = streetInput.value;
+        personList[index].city = cityInput.value;
+        personList[index].zipcode = postalInput.value;
+        
         const orderList = document.getElementById('list');
         orderList.innerText = '';
 
@@ -152,6 +192,7 @@ const lNameInput = document.getElementById('last-name');
 const lNameErrorElement = document.getElementById('lastNameError');
 const emailInput = document.getElementById('email');
 const emailErrorElement = document.getElementById('emailError');
+const emailErrorElementt = document.getElementById('emailErrort');
 const phoneInput = document.getElementById('phone');
 const phoneErrorElement = document.getElementById('phoneError');
 const streetInput = document.getElementById('street');
@@ -220,4 +261,14 @@ const validateForm = () => {
         return false;
     }
 }
+
+function uuid() {
+    return 'SExxxxx-Hxx'.replace(/[xy]/g, function(c) {
+      var r = Math.random() * 10 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+      return v.toString(10);
+    });
+  }
+
+  
+  
 
