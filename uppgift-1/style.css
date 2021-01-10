@@ -36,7 +36,13 @@ h4{
     border-radius: 5px;
     border: 1px solid rgb(78, 151, 75);
 }
-
+.update{
+    width: 100%;
+    background-color: gray;
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid rgb(78, 151, 75);
+}
 .form-style{
     margin-top: 80px;
     box-shadow: -1px 1px 15px 1px #D2B48C;
@@ -159,4 +165,7 @@ input[type=number] {
     cursor: pointer;
     font-size: 14px;
     color: lightgray;
+}
+.saveBtn{
+    color: rgb(94, 194, 70);
 }

@@ -31,12 +31,16 @@ function CreatePerson() {
         return person;
 }
 
+
+
 function renderLi(person) {
     const li = document.createElement('li');
     const div = document.createElement('div');
     const lbl = document.createElement('label');
     const btnEdit = document.createElement('button');
     const btnTrash = document.createElement('button');
+    const btnSave = document.createElement('button');
+    
     const divDetails = document.createElement('div');
     divDetails.classList.add('item-details');
     const divRow = document.createElement('div');
@@ -53,6 +57,10 @@ function renderLi(person) {
     const divAddress = document.createElement('div');
     divAddress.classList.add('address', 'col-md-5');
     const divAdd = document.createElement('div');
+
+    
+    
+
 
     divId.innerText = 'Id : ';
     divemail.innerText = 'Email :  ';
@@ -79,18 +87,31 @@ function renderLi(person) {
     btnTrash.classList.add('btn');
     btnEdit.innerHTML = '<i class="far fa-edit"></i>';
     btnTrash.innerHTML = '<i class="fa fa-trash"></i>';
+    btnSave.innerHTML = '<i class="far fa-save saveBtn"></i>';
     lbl.innerText = `${person.firstName} ${person.lastName}`;
 
     btnTrash.addEventListener('click', () => { removeFunc(person) });
-    divDetails.addEventListener('click', () => { prepareEditFunc(person) });
-    lbl.addEventListener('click', () => { prepareEditFunc(person) });
-    btnEdit.addEventListener('click', () => { editFunc(person) });
+    // divDetails.addEventListener('click', () => { prepareEditFunc(person) });
+    // lbl.addEventListener('click', () => { prepareEditFunc(person) });
+    btnEdit.addEventListener('click', () => { prepareEditFunc(person) });
+    btnSave.addEventListener('click', () => { 
+        if(updateFunc(person)) {
+            $(btnEdit).show(); 
+            initializeInput();    
+        }
+    });
+
+    $(document).ready(function(){
+        $(btnSave).hide();
+    });
+
     
-    div.append(lbl, btnEdit, btnTrash);
+    
+    div.append(lbl, btnTrash, btnSave, btnEdit);
     li.append(div, divDetails);
 
     $(document).ready(function(){
-        $(divDetails).hide();
+        $(divDetails).show();
     });
 
     $(document).ready(function(){
@@ -99,6 +120,12 @@ function renderLi(person) {
         });
       });
 
+      $(document).ready(function(){
+        $(btnEdit).click(function(){
+            $(btnSave).show();
+            $(btnEdit).hide();
+        });
+      });
     return li;
 }
 
@@ -121,6 +148,7 @@ function submitFunc() {
             for (const item of personList) {
                 orderList.append(renderLi(item));
             }
+            initializeInput();
         } 
     }else{
         emailErrorElementt.innerText = '';
@@ -137,25 +165,43 @@ const compare = (email, list) => {
     return exist;
 }
 
-const editFunc = (person) => {
+
+const updateFunc = (person) => {
     const index = personList.indexOf(person);
+    const sameId = person.id;
     if (validateForm()) {
         
-        personList[index].firstName = fNameInput.value;
-        personList[index].lastName = lNameInput.value;
-        personList[index].email = emailInput.value;
-        personList[index].phone = phoneInput.value;
-        personList[index].street = streetInput.value;
-        personList[index].city = cityInput.value;
-        personList[index].zipcode = postalInput.value;
-        
-        const orderList = document.getElementById('list');
-        orderList.innerText = '';
+        person1 = CreatePerson();
+        emailErrorElementt.innerText = '';
+        if (compare(person1.email, personList)){
+            if (person1.email === personList[index].email) {
+                personList[index] = person1; 
+                personList[index].id = sameId; 
+                const orderList = document.getElementById('list');
+                orderList.innerText = '';
 
-        for (const item of personList) {
-            orderList.append(renderLi(item));
-        }
-    } 
+                for (const item of personList) {
+                    orderList.append(renderLi(item));
+                }
+                return true;
+            }else{
+                emailErrorElementt.innerText = 'this email is already registered';
+            } 
+        }else {
+            personList[index] = person1; 
+            personList[index].id = sameId; 
+            const orderList = document.getElementById('list');
+            orderList.innerText = '';
+
+            for (const item of personList) {
+                orderList.append(renderLi(item));
+            }
+            return true;
+        } 
+    }else{
+        emailErrorElementt.innerText = '';
+        return false;
+    }
 }
 
 function removeFunc(person) {
@@ -181,26 +227,9 @@ const prepareEditFunc = (person) => {
 
     fNameInput.select();
     return personList.indexOf(person);
+
 }
 
-
-
-
-const fNameInput = document.getElementById('first-name');
-const fNameErrorElement = document.getElementById('firstNameError');
-const lNameInput = document.getElementById('last-name');
-const lNameErrorElement = document.getElementById('lastNameError');
-const emailInput = document.getElementById('email');
-const emailErrorElement = document.getElementById('emailError');
-const emailErrorElementt = document.getElementById('emailErrort');
-const phoneInput = document.getElementById('phone');
-const phoneErrorElement = document.getElementById('phoneError');
-const streetInput = document.getElementById('street');
-const streetErrorElement = document.getElementById('streetError');
-const cityInput = document.getElementById('city');
-const cityErrorElement = document.getElementById('cityError');
-const postalInput = document.getElementById('zipcode');
-const postalErrorElement = document.getElementById('zipcodeError');
 
 function validateInput(inputElement, errorElement, errorMessage) {
     errorElement.innerText = '';
@@ -255,7 +284,7 @@ const validateForm = () => {
     var isCity = validateInput(cityInput, cityErrorElement, 'city is required');
     var isPostal = validatePostal(postalInput, postalErrorElement, 'postal code must have 5 digits');
 
-    if (isName && isFamily && isEmail && isPhone && isStreet && isCity && isPostal){
+    if (isName && isFamily && isStreet && isCity && isEmail && isPhone && isPostal){
         return true;
     }else{
         return false;
@@ -269,6 +298,30 @@ function uuid() {
     });
   }
 
-  
+const initializeInput = () => {
+    fNameInput.value = '';
+    lNameInput.value = '';
+    emailInput.value = '';
+    phoneInput.value = '';
+    streetInput.value = '';
+    cityInput.value = '';
+    postalInput.value = '';
+}
   
 
+
+const fNameInput = document.getElementById('first-name');
+const fNameErrorElement = document.getElementById('firstNameError');
+const lNameInput = document.getElementById('last-name');
+const lNameErrorElement = document.getElementById('lastNameError');
+const emailInput = document.getElementById('email');
+const emailErrorElement = document.getElementById('emailError');
+const emailErrorElementt = document.getElementById('emailErrort');
+const phoneInput = document.getElementById('phone');
+const phoneErrorElement = document.getElementById('phoneError');
+const streetInput = document.getElementById('street');
+const streetErrorElement = document.getElementById('streetError');
+const cityInput = document.getElementById('city');
+const cityErrorElement = document.getElementById('cityError');
+const postalInput = document.getElementById('zipcode');
+const postalErrorElement = document.getElementById('zipcodeError');
