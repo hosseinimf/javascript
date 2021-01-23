@@ -58,8 +58,6 @@ function renderLi(person) {
     divAddress.classList.add('address', 'col-md-5');
     const divAdd = document.createElement('div');
 
-    
-    
 
 
     divId.innerText = 'Id : ';
